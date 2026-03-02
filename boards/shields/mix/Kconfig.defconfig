@@ -1,6 +1,6 @@
 if SHIELD_MIX_LEFT
 
-config ZMK_KEYBOARD _NAME
+config ZMK_KEYBOARD_NAME
     default "mix"
 
 config ZMK_SPLIT_ROLE_CENTRAL
