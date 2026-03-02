@@ -4,6 +4,8 @@ manifest:
     url-base: https://github.com/zmkfirmware
   - name: mctechnology17
     url-base: https://github.com/mctechnology17
+  - name: geeksville
+    url-base: https://github.com/geeksville
 
     
   projects:
@@ -12,9 +14,8 @@ manifest:
     revision: v0.3
     import: app/west.yml
   - name: cirque-input-module
-    url: https://github.com/petejohanson/cirque-input-module
-    revision: main
-    path: modules/cirque-input-module
+    remote: geeksville
+    revision: toucan
   - name: zmk-nice-oled
     remote: mctechnology17
     revision: main

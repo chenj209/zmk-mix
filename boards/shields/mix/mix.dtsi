@@ -8,7 +8,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include "mixlayout.dtsi"
 
-#include <dt-bindings/led/led.h>
 
 
 
@@ -19,7 +18,6 @@
 
 / {
     chosen {
-        zephyr,display = &oled;
         zmk,kscan = &kscan0;
         zmk,physical-layout = &mix_layout;
     };
@@ -93,34 +91,30 @@ RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4) RC(4,5)  RC(4,6) RC(4,7) RC(4,8) RC(4,9)
         compatible = "zmk,input-listener";
         status = "disabled";
         device = <&glidepoint_split>;
-        input-processors = <&zip_xy_scaler 250 100>;
+        input-processors = <&zip_xy_scaler 1 4>;
         scroller {
             layers = <1 2>;
             input-processors = <
                 &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 1 2
+                &zip_scroll_scaler 1 6
                 &zip_scroll_transform INPUT_TRANSFORM_X_INVERT
             >;
+        };
+        base {
+            layers = <0>;
+            input-processors = <
+                &touch_processor    
+            >;        
+        };  
+    };
+    input_processors {
+        touch_processor: touch_processor {
+            compatible = "zmk,input-processor-behaviors";
+            #input-processor-cells = <0>;
+ 
+            codes = <INPUT_BTN_TOUCH>;      // watch for the 'touch' pseudo button
+            bindings  = <&mo 3>;            // Activate Layer 3 while held &mo 3
         };
     };
 };
 
-&pro_micro_i2c {
-    status = "okay";
-
-    oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;
-        width = <128>;
-        height = <32>;
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <31>;
-        segment-remap;
-        com-invdir;
-        com-sequential;
-        inversion-on;
-        prechargep = <0x22>;
-    };
-};
