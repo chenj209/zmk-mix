@@ -100,21 +100,6 @@ RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4) RC(4,5)  RC(4,6) RC(4,7) RC(4,8) RC(4,9)
                 &zip_scroll_transform INPUT_TRANSFORM_X_INVERT
             >;
         };
-        base {
-            layers = <0>;
-            input-processors = <
-                &touch_processor    
-            >;        
-        };  
-    };
-    input_processors {
-        touch_processor: touch_processor {
-            compatible = "zmk,input-processor-behaviors";
-            #input-processor-cells = <0>;
- 
-            codes = <INPUT_BTN_TOUCH>;      // watch for the 'touch' pseudo button
-            bindings  = <&mo 3>;            // Activate Layer 3 while held &mo 3
-        };
     };
 };
 
